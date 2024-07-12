@@ -1,0 +1,44 @@
+name: .NET CI Ohne Veröffentlichung
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    # Repository auschecken
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # .NET einrichten
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4.0.1
+      with:
+        dotnet-version: 8.0.x
+
+    # Abhängigkeiten wiederherstellen
+    - name: Restore dependencies
+      run: dotnet restore
+
+    # Lösung bauen
+    - name: Build solution
+      run: dotnet build --configuration Release --no-restore
+
+    # Tests ausführen
+    - name: Run tests
+      run: dotnet test --configuration Release --no-restore --logger:trx
+
+    # Testergebnisse veröffentlichen
+    - name: Publish Test Results
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: Test Results
+        path: '**/*.trx'
