@@ -29,8 +29,8 @@ jobs:
 
     # Build the solution
     - name: Build solution
-      run: dotnet build ./TESTneu2.sln --configuration Release
+      run: dotnet build  --configuration Release
 
     # Run tests
     - name: Run tests
-      run: dotnet test ./TESTneu2.sln --configuration Release
+      run: dotnet test  --configuration Release
