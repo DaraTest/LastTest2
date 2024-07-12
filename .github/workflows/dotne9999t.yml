@@ -31,9 +31,8 @@ jobs:
     # Build the solution
     - name: Build solution
       working-directory: ./src
-      run: dotnet build --configuration Release
-
+      run: dotnet build
     # Run tests
     - name: Run tests
       working-directory: ./src
-      run: dotnet test --configuration Release
+      run: dotnet test
