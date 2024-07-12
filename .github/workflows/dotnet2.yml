@@ -25,12 +25,12 @@ jobs:
 
     # Restore dependencies
     - name: Restore dependencies
-      run: dotnet restore TESTneu2.sln
+      run: dotnet restore ./TESTneu2.sln
 
     # Build the solution
     - name: Build solution
-      run: dotnet build TESTneu2.sln --configuration Release
+      run: dotnet build ./TESTneu2.sln --configuration Release
 
     # Run tests
     - name: Run tests
-      run: dotnet test TESTneu2.sln --configuration Release
+      run: dotnet test ./TESTneu2.sln --configuration Release
