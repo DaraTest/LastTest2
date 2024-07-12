@@ -18,12 +18,13 @@ jobs:
       uses: actions/setup-dotnet@v4.0.1
       with:
         dotnet-version: '8.0.x'
+        architecture: 'x64'  # oder 'x86' falls nötig
 
     - name: Restore dependencies
       run: dotnet restore
 
     - name: Build
-      run: dotnet build --configuration Release
+      run: dotnet build --configuration Release 
 
     - name: Run tests
-      run: dotnet test --configuration Release
+      run: dotnet test --configuration Release 
