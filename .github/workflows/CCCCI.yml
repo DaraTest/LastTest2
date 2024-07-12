@@ -1,36 +1,35 @@
-name: .NET CI
+name: .NET Framework CI
 
+# Für alle Push und Pull-Requests auf dem Branch main.
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
   pull_request:
-    branches:
-      - main
+    branches: [ "main" ]
 
+# Die Aufgaben 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
     # Check out the repository
-    - name: Checkout repository
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
     # Set up .NET
     - name: Setup .NET
-      uses: actions/setup-dotnet@v4.0.1
+      uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: '7.x' # Hier die gewünschte .NET Version angeben
 
     # Restore dependencies
     - name: Restore dependencies
       run: dotnet restore
 
     # Build the solution
-    - name: Build solution
+    - name: Build
       run: dotnet build --configuration Release
 
     # Run tests
-    - name: Run tests
-      run: dotnet test --configuration Release
+    - name: Test
+      run: dotnet test --configuration Release --no-build --verbosity normal
